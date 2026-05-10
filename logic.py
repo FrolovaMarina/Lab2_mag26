@@ -73,14 +73,14 @@ class Game:
         piece = self.board[r][c]
         captures = []
         if piece == 'w':  
-            for dr, dc in [(-1, -1), (-1, 1)]:
+            for dr, dc in [(-1,-1), (-1,1), (1,-1), (1,1)]:
                 nr, nc = r + dr, c + dc
                 if 0 <= nr < 8 and 0 <= nc < 8 and self.board[nr][nc] in ('b', 'B'):
                     nnr, nnc = nr + dr, nc + dc
                     if 0 <= nnr < 8 and 0 <= nnc < 8 and self.board[nnr][nnc] == 0:
                         captures.append((r, c, nnr, nnc, True, nr, nc))
         elif piece == 'b':  
-            for dr, dc in [(1, -1), (1, 1)]:
+            for dr, dc in [(-1,-1), (-1,1), (1,-1), (1,1)]:
                 nr, nc = r + dr, c + dc
                 if 0 <= nr < 8 and 0 <= nc < 8 and self.board[nr][nc] in ('w', 'W'):
                     nnr, nnc = nr + dr, nc + dc
@@ -91,8 +91,7 @@ class Game:
                 nr, nc = r + dr, c + dc
                 while 0 <= nr < 8 and 0 <= nc < 8:
                     if self.board[nr][nc] != 0:
-                        if (piece == 'W' and self.board[nr][nc] in ('b', 'B')) or \
-                           (piece == 'B' and self.board[nr][nc] in ('w', 'W')):
+                        if (piece == 'W' and self.board[nr][nc] in ('b', 'B')) or (piece == 'B' and self.board[nr][nc] in ('w', 'W')):
                             nnr, nnc = nr + dr, nc + dc
                             if 0 <= nnr < 8 and 0 <= nnc < 8 and self.board[nnr][nnc] == 0:
                                 captures.append((r, c, nnr, nnc, True, nr, nc))
